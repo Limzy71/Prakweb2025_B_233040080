@@ -13,4 +13,14 @@ class CategoryController extends Controller
         $categories = Category::all();
         return view('categories', compact('categories'));
     }
+
+    public function show(Category $category)
+    {
+        return view('posts', [
+            'title' => "Post by Category: $category->name",
+            'active' => 'categories',
+            // Mengambil postingan yang terhubung dengan kategori ini
+            'posts' => $category->posts->load('category', 'author')
+        ]);
+    }
 }

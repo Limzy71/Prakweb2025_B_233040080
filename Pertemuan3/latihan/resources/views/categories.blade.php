@@ -10,7 +10,7 @@
                     <h2 class="text-xl font-semibold mb-2">
                         {{ $category->name }}
                     </h2>
-                    <a href="/posts?category={{ $category->slug }}" class="text-blue-500 hover:underline">
+                    <a href="{{ route('categories.show', $category->id) }}" class="text-blue-500 hover:underline">
                         Lihat Postingan &raquo;
                     </a>
                 </div>

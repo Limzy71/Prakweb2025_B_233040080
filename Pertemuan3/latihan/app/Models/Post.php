@@ -13,16 +13,25 @@ class Post extends Model
 
     protected $guarded = ['id'];
 
-    protected $with = ['author', 'category'];
+    protected $with = ['category', 'author'];
 
-    public function author(): BelongsTo
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function author()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function category(): BelongsTo
+    public function posts () {
+        return $this->hasMany(Post::class);
+    }
+
+    public function user()
     {
-        return $this->belongsTo(Category::class, 'category_id');
+        return $this->belongsTo(User::class);
     }
 
     // Query Scope: Filter pencarian berdasarkan search, category, atau author
