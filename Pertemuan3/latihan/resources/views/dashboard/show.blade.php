@@ -14,8 +14,8 @@
             </div>
 
             @if ($post->image)
-                    <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}" alt="{{ $post->title }}"
-                        class="w-full h-65 object-cover rounded-lg mb-6">
+                <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}" alt="{{ $post->title }}"
+                    class="w-full h-65 object-cover rounded-lg mb-6">
             @endif
         </header>
 

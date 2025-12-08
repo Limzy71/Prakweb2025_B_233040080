@@ -1,2 +1,1 @@
-import './bootstrap';
-import './auto-slug';
+import "./bootstrap";

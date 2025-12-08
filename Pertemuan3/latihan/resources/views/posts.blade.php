@@ -11,8 +11,8 @@
                 </a>
             </h2>
             <div class="text-gray-500 text-sm mb-2">
-                By <a href="#" class="hover:underline text-gray-700">{{ $post->author->name }}</a> 
-                in <a href="#" class="hover:underline text-gray-700">{{ $post->category->name }}</a>
+                By <a href="#" class="hover:underline text-gray-700">{{ $post->author?->name }}</a>
+                in <a href="#" class="hover:underline text-gray-700">{{ $post->category?->name }}</a>
             </div>
             <p class="text-gray-700">{{ $post->excerpt }}</p>
             <a href="/posts/{{ $post->slug }}" class="text-sm text-blue-500 hover:underline">Read more &raquo;</a>

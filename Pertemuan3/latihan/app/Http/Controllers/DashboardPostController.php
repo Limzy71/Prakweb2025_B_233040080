@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
@@ -18,7 +19,7 @@ class DashboardPostController extends Controller
      */
     public function index()
     {
-        $posts = Post::where('user_id', auth()->user()->id);
+        $posts = Post::where('user_id', Auth::user()->id);
 
         // Fitur Pencarian
         if (request('search')) {
@@ -51,7 +52,7 @@ class DashboardPostController extends Controller
         // Validasi input dengan custom messages
         $validator = Validator::make($request->all(), [
             'title'       => 'required|max:255',
-            'category_id' => 'required|exists:categories,id', // Pastikan ID ada di tabel categories
+            'category_id' => 'required|exists:categories,id',
             'excerpt'     => 'required',
             'body'        => 'required',
             // Aturan gambar: boleh kosong (nullable), harus image, format tertentu, max 2MB
@@ -102,7 +103,7 @@ class DashboardPostController extends Controller
             'excerpt'     => $request->excerpt,
             'body'        => $request->body,
             'image'       => $imagePath, // Simpan path gambar (contoh: 'post-images/filename.jpg')
-            'user_id' => auth()->user()->id,
+            'user_id' => Auth::user()->id,
         ]);
 
         return redirect()->route('dashboard.index')->with('success', 'Post created successfully!');
@@ -166,7 +167,7 @@ class DashboardPostController extends Controller
             $validatedData['image'] = $request->file('image')->store('post-images', 'public');
         }
 
-        $validatedData['user_id'] = auth()->user()->id;
+        $validatedData['user_id'] = Auth::user()->id;
 
         // 4. Update
         Post::where('id', $post->id)->update($validatedData);
